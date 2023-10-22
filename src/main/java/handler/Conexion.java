@@ -3,7 +3,7 @@ package handler;
 import javax.sql.DataSource;
 import java.sql.*;
 public class Conexion {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/primecinemadb";
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/";
     private String username = "root";
     private String password = "";
     private Connection conn = null;
