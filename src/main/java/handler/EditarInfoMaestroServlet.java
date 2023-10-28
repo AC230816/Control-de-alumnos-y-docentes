@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import handler.Conexion;
 
 
-@WebServlet("/actualizarDatosMaestroServlet")
-public class actualizarDatosMaestroServlet extends HttpServlet{
+@WebServlet("/EditarInfoMaestroServlet")
+public class EditarInfoMaestroServlet extends HttpServlet{
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
