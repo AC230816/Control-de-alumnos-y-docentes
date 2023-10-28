@@ -8,6 +8,19 @@ public class Conexion {
     private String password = "";
     private Connection conn = null;
 
+    public Connection getConnection() {
+        try {
+            if (conn == null || conn.isClosed()) {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection(jdbcUrl, username, password);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return conn;
+    }
+
+
     public void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
