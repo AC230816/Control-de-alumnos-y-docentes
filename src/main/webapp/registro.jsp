@@ -63,7 +63,7 @@
           <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="submit" class="btn btn-primary" id="botonRegistrar">Registrar</button>
       </form>
     </div>
   </div>
