@@ -21,6 +21,5 @@ public class loginServlet extends HttpServlet {
         } else {
             response.sendRedirect("registro.jsp?exito=1");
         }
-
     }
 }
