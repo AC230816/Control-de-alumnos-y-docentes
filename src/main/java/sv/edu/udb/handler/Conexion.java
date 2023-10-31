@@ -24,23 +24,57 @@ public class Conexion {
             System.out.println("Clase no encontrada");
             e.printStackTrace();
         } catch (SQLException ex) {
-            System.out.println("Error en db");
+            System.out.println("Error en db 1");
             ex.printStackTrace();
         }
     }
 
-    public void insertRegistroProfesor(String nombre, String apellido, int edad, String sexo, String password,  String materia) {
+    public boolean insertRegistroProfesor(String nombre, String apellido, int edad, String sexo, String password,  String materia) {
         try {
             Statement st = conn.createStatement();
 
             String query = "INSERT INTO profesor (Nombre, Apellido, Edad, Sexo, Password, Materia) VALUES\n" +
                     "('" + nombre + "', '" + apellido + "','" + edad + "', '" + sexo + "','" + password + "','" + materia + "')";
             st.execute(query);
+            System.out.println("Se Inserto en profesor correctamente");
         } catch (Exception ex) {
-            System.out.println("Error en db");
+            System.out.println("Error en db 2");
             ex.printStackTrace();
 
         }
+        return true;
+    }
+
+    public boolean insertRegistroAlumno(String nombre, String apellido, int edad, String sexo, String password) {
+        try {
+            Statement st = conn.createStatement();
+
+            String query = "INSERT INTO estudiante (Nombre, Apellido, Edad, Sexo, Password) VALUES\n" +
+                    "('" + nombre + "', '" + apellido + "','" + edad + "', '" + sexo + "','" + password + "')";
+            st.execute(query);
+            System.out.println("Se Inserto en alumno correctamente");
+        } catch (Exception ex) {
+            System.out.println("Error en db 2");
+            ex.printStackTrace();
+
+        }
+        return true;
+    }
+
+    public boolean insertlogin(String nombre, String password) {
+        try {
+            Statement st = conn.createStatement();
+
+            String query = "INSERT INTO login (Usuario, Password) VALUES\n" +
+                    "('" + nombre + "', '" + password + "')";
+            st.execute(query);
+            System.out.println("Se Inserto en el login correctamente");
+        } catch (Exception ex) {
+            System.out.println("Error en db 2");
+            ex.printStackTrace();
+
+        }
+        return true;
     }
 
     public boolean verificarInicioSesion(String usuario, String contraseña) {
@@ -48,7 +82,7 @@ public class Conexion {
             Statement st = conn.createStatement();
             ResultSet rs = null;
 
-            String query = "SELECT * FROM usuario WHERE Nombre = '" + usuario + "' AND Password = '" + contraseña + "'";
+            String query = "SELECT * FROM login WHERE Usuario = '" + usuario + "' AND Password = '" + contraseña + "'";
 
             rs = st.executeQuery(query);
 
@@ -59,7 +93,7 @@ public class Conexion {
             rs.close();
             st.close();
         } catch (Exception ex) {
-            System.out.println("Error en la base de datos");
+            System.out.println("Error en la base de datos 4");
             ex.printStackTrace();
         }
 
@@ -73,7 +107,7 @@ public class Conexion {
 
             System.out.println("Coneccion cerrada");
         } catch (SQLException ex) {
-            System.out.println("Error en db");
+            System.out.println("Error en db 5");
             ex.printStackTrace();
         }
     }
