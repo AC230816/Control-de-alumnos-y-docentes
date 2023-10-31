@@ -1,4 +1,4 @@
-package handler;
+package sv.edu.udb.handler;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -29,7 +29,7 @@ public class Conexion {
         }
     }
 
-    public void insertRegistroProfesor(String nombre, String apellido, String edad, String sexo, String password,  String materia) {
+    public void insertRegistroProfesor(String nombre, String apellido, int edad, String sexo, String password,  String materia) {
         try {
             Statement st = conn.createStatement();
 
