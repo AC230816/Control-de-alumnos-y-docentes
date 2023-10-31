@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 @WebServlet(name = "RegistroUsuarioServlet", value = "/RegistroUsuarioServlet")
 public class registroServlets extends HttpServlet {
+    boolean exito = false, exito2 = false;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Conexion conn = new Conexion();
         conn.conectar();
@@ -22,10 +23,19 @@ public class registroServlets extends HttpServlet {
         String sexo = request.getParameter("sexo");
         String password = request.getParameter("password");
         String confirm_password = request.getParameter("confirm_password");
-
-        response.sendRedirect("login.jsp");
-        if (ocupacion.equalsIgnoreCase("profesor")){
-            conn.insertRegistroProfesor(nombre, apellido, edad, sexo, password, materia);
+        System.out.println("iniciamos el servlet");
+        if (ocupacion.equalsIgnoreCase("maestro")){
+               exito = conn.insertRegistroProfesor(nombre, apellido, edad, sexo, password, materia);
+               conn.insertlogin(nombre, password);
+        }
+        else {
+               exito2 = conn.insertRegistroAlumno(nombre, apellido, edad, sexo, password);
+               conn.insertlogin(nombre, password);
+        }
+        if (exito || exito2) {
+            response.sendRedirect("login.jsp?exito=1");
+        } else {
+            response.sendRedirect("registro.jsp?error=1");
         }
         conn.cerrar();
     }
