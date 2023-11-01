@@ -65,6 +65,7 @@
 
         <button type="submit" class="btn btn-primary" id="botonRegistrar">Registrar</button>
       </form>
+      <a href="login.jsp" class="btn btn-success">Cancelar</a>
     </div>
   </div>
 </div>

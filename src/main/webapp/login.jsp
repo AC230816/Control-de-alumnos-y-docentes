@@ -22,6 +22,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
       </form>
+      <a href="registro.jsp" class="btn btn-success">Registrarse</a>
     </div>
   </div>
 </div>
