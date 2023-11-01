@@ -3,9 +3,10 @@ package sv.edu.udb.handler;
 import javax.sql.DataSource;
 import java.sql.*;
 public class Conexion {
-    private String jdbcUrl = "jdbc:mysql://localhost:3306/controludb";
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/controldb";
     private String username = "root";
     private String password = "";
+    private ResultSet rs;
     private Connection conn = null;
 
     public void conectar() {
@@ -109,6 +110,21 @@ public class Conexion {
         } catch (SQLException ex) {
             System.out.println("Error en db 5");
             ex.printStackTrace();
+        }
+    }
+
+    //Getters
+    public ResultSet getRs(){
+        return this.rs;
+    }
+    //Setters
+    public void setRs(String query){
+        try{
+            Statement st = conn.createStatement();
+            this.rs = st.executeQuery(query);
+        } catch (Exception e){
+            System.out.println("Error en rs");
+            e.printStackTrace();
         }
     }
 }

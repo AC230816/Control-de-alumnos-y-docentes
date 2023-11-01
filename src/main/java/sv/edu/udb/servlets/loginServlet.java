@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import sv.edu.udb.handler.Conexion;
 
 import java.io.IOException;
@@ -15,11 +16,19 @@ public class loginServlet extends HttpServlet {
         Conexion conn = new Conexion();
         String nombre = request.getParameter("username");
         String password = request.getParameter("password");
+
+        HttpSession session = request.getSession(true);
+
         conn.conectar();
         if (conn.verificarInicioSesion(nombre,password)){
-            response.sendRedirect("index.jsp?exito=1");
+            session.setAttribute("usuario",nombre);
+            session.setAttribute("password",password);
+            response.sendRedirect("alumno.jsp?exito=1");
         } else {
-            response.sendRedirect("registro.jsp?exito=1");
+            session.setAttribute("usuario",nombre);
+            session.setAttribute("password",password);
+            response.sendRedirect("maestro.jsp?exito=1");
         }
+        conn.cerrar();
     }
 }
