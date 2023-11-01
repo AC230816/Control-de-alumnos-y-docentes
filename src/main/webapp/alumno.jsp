@@ -25,7 +25,14 @@
     <div class="col-md-6">
       <button id="editarInfoButton" class="btn btn-success">Actualizar Mi Información</button>
     </div>
+    <div id="info-alumno-response" class="col-md-6" style="margin-top: 10px">
+      <% String htmlResponse = (String) request.getAttribute("htmlResponse");
+        if (htmlResponse != null) { %>
+      <%= htmlResponse %>
+      <% } %>
+    </div>
   </div>
 </div>
+
 </body>
 </html>

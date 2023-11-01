@@ -42,10 +42,37 @@ public class VerInfoAlumnoServlet extends HttpServlet {
             }
             conn.cerrar();
 
-            request.setAttribute("alumno",alumno);
+            String htmlResponse = "<div id='dynamicContent' class='alert alert-info'>"
+                    + "<h3>Mi Información</h3>"
+                    + "<table class='table table-bordered table-striped'>"
+                    + "<tr>"
+                    + "<th>ID</th>"
+                    + "<th>Nombre</th>"
+                    + "<th>Apellido</th>"
+                    + "<th>Edad</th>"
+                    + "<th>Sexo</th>"
+                    + "<th>Contraseña</th>"
+                    + "</tr>"
+                    + "<tr>"
+                    + "<td>" + alumno.getId() + "</td>"
+                    + "<td>" + alumno.getNombre() + "</td>"
+                    + "<td>" + alumno.getApellido() + "</td>"
+                    + "<td>" + alumno.getEdad() + "</td>"
+                    + "<td>" + alumno.getSexo() + "</td>"
+                    + "<td>" + alumno.getPassword() + "</td>"
+                    + "</tr>"
+                    + "</table>"
+                    + "<button class='btn btn-danger' onclick='cerrarHtml()'>Cerrar</button>"
+                    + "</div>"
+                    + "<script>"
+                    + "function cerrarHtml() {"
+                    + "  var dynamicContent = document.getElementById('dynamicContent');"
+                    + "  dynamicContent.style.display = 'none';"
+                    + "}"
+                    + "</script>";
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("infoUsuario.jsp");
-            dispatcher.forward(request,response);
+            request.setAttribute("htmlResponse", htmlResponse);
+            request.getRequestDispatcher("alumno.jsp").forward(request,response);
         } else {
             response.sendRedirect("login.jsp");
         }
