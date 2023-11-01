@@ -53,8 +53,8 @@ public class EditarInfoAlumnoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession(false);
 
-        int edad = Integer.parseInt(session.getAttribute("edad").toString());
-        String password = session.getAttribute("password").toString();
+        int edad = Integer.parseInt(request.getParameter("edad"));
+        String password = request.getParameter("password");
         int id = Integer.parseInt(session.getAttribute("ID").toString());
 
         if (session != null) {
