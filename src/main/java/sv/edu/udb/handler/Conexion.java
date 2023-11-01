@@ -78,12 +78,12 @@ public class Conexion {
         return true;
     }
 
-    public boolean verificarInicioSesion(String usuario, String contraseña) {
+    public boolean verificarInicioSesion(String usuario, String password) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = null;
 
-            String query = "SELECT * FROM login WHERE Usuario = '" + usuario + "' AND Password = '" + contraseña + "'";
+            String query = "SELECT * FROM login WHERE Usuario = '" + usuario + "' AND Password = '" + password + "'";
 
             rs = st.executeQuery(query);
 
