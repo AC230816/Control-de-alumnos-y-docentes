@@ -25,7 +25,7 @@ public class Conexion {
             System.out.println("Clase no encontrada");
             e.printStackTrace();
         } catch (SQLException ex) {
-            System.out.println("Error en db 1");
+            System.out.println("Error en db Conectar");
             ex.printStackTrace();
         }
     }
@@ -39,7 +39,7 @@ public class Conexion {
             st.execute(query);
             System.out.println("Se Inserto en profesor correctamente");
         } catch (Exception ex) {
-            System.out.println("Error en db 2");
+            System.out.println("Error en db Profesor");
             ex.printStackTrace();
 
         }
@@ -55,7 +55,7 @@ public class Conexion {
             st.execute(query);
             System.out.println("Se Inserto en alumno correctamente");
         } catch (Exception ex) {
-            System.out.println("Error en db 2");
+            System.out.println("Error en db Alumno");
             ex.printStackTrace();
 
         }
@@ -71,7 +71,7 @@ public class Conexion {
             st.execute(query);
             System.out.println("Se Inserto en el login correctamente");
         } catch (Exception ex) {
-            System.out.println("Error en db 2");
+            System.out.println("Error en db Login");
             ex.printStackTrace();
 
         }
@@ -94,7 +94,7 @@ public class Conexion {
             rs.close();
             st.close();
         } catch (Exception ex) {
-            System.out.println("Error en la base de datos 4");
+            System.out.println("Error en la base de datos verificarInicioSesion");
             ex.printStackTrace();
         }
 
@@ -108,7 +108,7 @@ public class Conexion {
 
             System.out.println("Coneccion cerrada");
         } catch (SQLException ex) {
-            System.out.println("Error en db 5");
+            System.out.println("Error en db cerrar");
             ex.printStackTrace();
         }
     }
