@@ -14,10 +14,10 @@
   <h2 class="mt-4">Información del Maestro</h2>
   <div class="row">
     <div class="col-md-6">
-      <a href="VerInfoMaestroServlet" class="btn btn-primary">Visualizar Mi Información</a>
+      <a href="verInfoMaestro.jsp" class="btn btn-primary">Visualizar Mi Información</a>
     </div>
     <div class="col-md-6">
-      <a href="EditarInfoMaestroServlet" class="btn btn-success">Actualizar Mi Información</a>
+      <a href="actualizarInfoMaestro.jsp" class="btn btn-success">Actualizar Mi Información</a>
     </div>
   </div>
 
@@ -25,7 +25,7 @@
   <h2 class="mt-4">Alumnos Asignados</h2>
   <div class="row">
     <div class="col-md-12">
-      <a href="VerAlumnosAsignadosServlet" class="btn btn-primary">Visualizar Alumnos Asignados</a>
+      <a href="alumnosAsignados.jsp" class="btn btn-primary">Visualizar Alumnos Asignados</a>
     </div>
   </div>
 </div>

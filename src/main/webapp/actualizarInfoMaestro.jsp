@@ -11,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h1>Actualizar informacion - Maestros</h1>
-            <form action="RegistroUsuarioServlet" method="post">
+            <form action="maestro.jsp" method="post">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" required>
