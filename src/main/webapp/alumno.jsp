@@ -23,12 +23,18 @@
       <a href="VerInfoAlumnoServlet" class="btn btn-primary">Visualizar Mi Información</a>
     </div>
     <div class="col-md-6">
-      <button id="editarInfoButton" class="btn btn-success">Actualizar Mi Información</button>
+      <a href="EditarInfoAlumnoServlet" id="editarInfoButton" class="btn btn-success">Actualizar Mi Información</a>
     </div>
     <div id="info-alumno-response" class="col-md-6" style="margin-top: 10px">
-      <% String htmlResponse = (String) request.getAttribute("htmlResponse");
-        if (htmlResponse != null) { %>
-      <%= htmlResponse %>
+      <% String htmlViewResponse = (String) request.getAttribute("htmlResponse");
+        if (htmlViewResponse != null) { %>
+      <%= htmlViewResponse %>
+      <% } %>
+    </div>
+    <div id="editar-info-alumno-response" class="col-md-6" style="margin-top: 10px">
+      <% String htmlEditResponse = (String) request.getAttribute("htmlEditResponse");
+        if (htmlEditResponse != null) { %>
+      <%= htmlEditResponse %>
       <% } %>
     </div>
   </div>

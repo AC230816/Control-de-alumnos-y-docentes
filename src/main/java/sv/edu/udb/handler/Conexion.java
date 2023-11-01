@@ -101,6 +101,22 @@ public class Conexion {
         return false;
     }
 
+    public void updateAlumno(int edad, String password, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Edad = '" + edad + "', Password = '" + password + "'" +
+                    "WHERE IDEstudiante = '" + id + "'";
+            //Actualizamos la tabla de log in
+            String query2 = "UPDATE login SET Password = '" + password + "'" +
+                    "WHERE ID = '" + id + "'";
+            st.execute(query);
+            st.execute(query2);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar alumno");
+            e.printStackTrace();
+        }
+    }
 
     public void cerrar() {
         try {
