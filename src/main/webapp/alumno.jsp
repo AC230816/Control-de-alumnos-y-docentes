@@ -1,6 +1,6 @@
 <%-- Vista de Alumno (alumno.jsp) --%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<jsp:include page="infoUsuario.jsp" />
+
 <html>
 <head>
   <title>Panel de Alumno</title>

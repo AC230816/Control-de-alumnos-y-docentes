@@ -13,9 +13,7 @@ public class Alumno implements Serializable {
     private String query;
     private int id;
 
-    public Alumno(){
-        this.setQuery();
-    }
+    public Alumno(){}
 
     //Getters
     public String getPassword(){
@@ -49,8 +47,8 @@ public class Alumno implements Serializable {
     public void setEdad(int edad){
         this.edad = edad;
     }
-    private void setQuery(){
-        this.query = "SELECT * FROM estudiante WHERE Nombre = '" + this.nombre + "' AND Password = '" + this.password + "'";
+    public void setQuery(){
+        this.query = "SELECT * FROM estudiante WHERE Nombre = '"+ this.nombre + "' AND Password = '" + this.password + "'";
     }
     public void setPassword(String password){
         this.password = password;

@@ -25,6 +25,7 @@ public class VerInfoAlumnoServlet extends HttpServlet {
             Conexion conn = new Conexion();
             conn.conectar();
             try{
+                alumno.setQuery();
                 conn.setRs(alumno.getQuery());
                 ResultSet rs = conn.getRs();
 
