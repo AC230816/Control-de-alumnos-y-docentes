@@ -32,7 +32,7 @@
       <% } %>
     </div>
     <div id="editar-info-alumno-response" class="col-md-6" style="margin-top: 10px">
-      <% String htmlEditResponse = (String) request.getAttribute("htmlEditResponse");
+      <% String htmlEditResponse = (String) request.getAttribute("htmlResponse");
         if (htmlEditResponse != null) { %>
       <%= htmlEditResponse %>
       <% } %>

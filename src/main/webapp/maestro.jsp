@@ -14,10 +14,24 @@
   <h2 class="mt-4">Información del Maestro</h2>
   <div class="row">
     <div class="col-md-6">
-      <a href="verInfoMaestro.jsp" class="btn btn-primary">Visualizar Mi Información</a>
+      <a href="VerInfoMaestroServlet" class="btn btn-primary">Visualizar Mi Información</a>
     </div>
     <div class="col-md-6">
-      <a href="actualizarInfoMaestro.jsp" class="btn btn-success">Actualizar Mi Información</a>
+      <a href="EditarInfoMaestroServlet" class="btn btn-success">Actualizar Mi Información</a>
+    </div>
+  </div>
+  <div class="row">
+    <div id="info-maestro-response" class="col-md-12" style="margin-top: 10px">
+      <% String htmlViewResponse = (String) request.getAttribute("htmlResponse");
+        if (htmlViewResponse != null) { %>
+      <%= htmlViewResponse %>
+      <% } %>
+    </div>
+    <div id="editar-info-maestro-response" class="col-md-6" style="margin-top: 10px">
+      <% String htmlEditResponse = (String) request.getAttribute("htmlEditResponse");
+        if (htmlEditResponse != null) { %>
+      <%= htmlEditResponse %>
+      <% } %>
     </div>
   </div>
 
@@ -25,7 +39,13 @@
   <h2 class="mt-4">Alumnos Asignados</h2>
   <div class="row">
     <div class="col-md-12">
-      <a href="alumnosAsignados.jsp" class="btn btn-primary">Visualizar Alumnos Asignados</a>
+      <a href="AlumnosAsignadosServlet" class="btn btn-primary">Visualizar Alumnos Asignados</a>
+    </div>
+    <div id="tabla-alumnos" class="col-md-12" style="margin-top: 10px">
+      <% String alumnos = (String) request.getAttribute("alumnos");
+        if (alumnos != null) { %>
+      <%= alumnos %>
+      <% } %>
     </div>
   </div>
 </div>

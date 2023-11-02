@@ -1,7 +1,12 @@
 package sv.edu.udb.handler;
 
+import sv.edu.udb.model.Alumno;
+
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Conexion {
     private String jdbcUrl = "jdbc:mysql://localhost:3306/controldb";
     private String username = "root";
@@ -78,17 +83,30 @@ public class Conexion {
         return true;
     }
 
-    public boolean verificarInicioSesion(String usuario, String password) {
+    public int verificarInicioSesion(String usuario, String password) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = null;
 
-            String query = "SELECT * FROM login WHERE Usuario = '" + usuario + "' AND Password = '" + password + "'";
-
+            String query = "SELECT * FROM estudiante WHERE Nombre = '" + usuario + "' AND Password = '" + password + "'";
             rs = st.executeQuery(query);
 
-            if (rs.next()) {
-                return true;
+            if(rs.next()){
+                return 1;
+            }
+
+            query = "SELECT * FROM profesor WHERE Nombre = '" + usuario + "' AND Password = '" + password + "'";
+            rs = st.executeQuery(query);
+
+            if(rs.next()){
+                return 2;
+            }
+
+            query = "SELECT * FROM admin WHERE Nombre = '" + usuario + "' AND Password = '" + password + "'";
+            rs = st.executeQuery(query);
+
+            if(rs.next()){
+                return 3;
             }
 
             rs.close();
@@ -98,7 +116,7 @@ public class Conexion {
             ex.printStackTrace();
         }
 
-        return false;
+        return 0;
     }
 
     public void updateAlumno(int edad, String password, int id){
@@ -106,16 +124,52 @@ public class Conexion {
             Statement st = conn.createStatement();
             String query = "UPDATE estudiante SET Edad = '" + edad + "', Password = '" + password + "'" +
                     "WHERE IDEstudiante = '" + id + "'";
-            //Actualizamos la tabla de log in
-            String query2 = "UPDATE login SET Password = '" + password + "'" +
-                    "WHERE ID = '" + id + "'";
             st.execute(query);
-            st.execute(query2);
             st.close();
         } catch (Exception e){
             System.out.println("Error al actualizar alumno");
             e.printStackTrace();
         }
+    }
+
+    public void updateMaestro(String password, String materia, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Materia = '" + materia + "', Password = '" + password + "'"
+                    + "WHERE IDEstudiante = '" + id + "'";
+            st.execute(query);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar maestro");
+            e.printStackTrace();
+        }
+    }
+
+    public List<Alumno> selectAlumnos(){
+        List<Alumno> alumnos = new ArrayList<>();
+
+        try{
+           String query = "SELECT IDEstudiante, Nombre, Apellido, Edad, Sexo FROM estudiante";
+           this.setRs(query);
+
+           while (rs.next()){
+               Alumno alumno = new Alumno();
+               alumno.setId(rs.getInt("IDEstudiante"));
+               alumno.setNombre(rs.getString("Nombre"));
+               alumno.setApellido(rs.getString("Apellido"));
+               alumno.setEdad(rs.getInt("Edad"));
+               alumno.setSexo(rs.getString("Sexo"));
+
+               alumnos.add(alumno);
+           }
+
+           rs.close();
+        } catch (Exception e){
+            System.out.println("Error al seleccionar todos los alummnos");
+            e.printStackTrace();
+        }
+
+        return alumnos;
     }
 
     public void cerrar() {
