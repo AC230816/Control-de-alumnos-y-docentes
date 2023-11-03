@@ -17,7 +17,22 @@
             <a href="VerInfoAlumnosServlet" class="btn btn-primary">Visualizar Información de Alumnos</a>
         </div>
         <div class="col-md-6">
-            <a href="InsertarEditarAlumnoServlet" class="btn btn-success">Insertar o Editar Información de Alumnos</a>
+            <a href="InsertarEditarAlumnoServlet?action=1" class="btn btn-success">Insertar o Editar Información de Alumnos</a>
+        </div>
+    </div>
+
+    <div id = "alumnos" class="row">
+        <div id="tabla-alumnos" class="col-md-12" style="margin-top: 10px">
+            <% String alumnos = (String) request.getAttribute("alumnos");
+                if (alumnos != null) { %>
+            <%= alumnos %>
+            <% } %>
+        </div>
+        <div  id = "editar-insertar-alumno" class="col-md-12" style = "margin-top: 10px">
+            <% String alumnoResponse = (String) request.getAttribute("adminResponseAlumno");
+                if (alumnoResponse != null) { %>
+            <%= alumnoResponse %>
+            <% } %>
         </div>
     </div>
 
@@ -25,10 +40,25 @@
     <h2 class="mt-4">Acciones para Docentes</h2>
     <div class="row">
         <div class="col-md-6">
-            <a href="VerInfoDocentesServlet" class="btn btn-primary">Visualizar Información de Docentes</a>
+            <a href="VerInfoMaestrosServlet" class="btn btn-primary">Visualizar Información de Docentes</a>
         </div>
         <div class="col-md-6">
-            <a href="InsertarEditarDocenteServlet" class="btn btn-success">Insertar o Editar Información de Docentes</a>
+            <a href="InsertarEditarMaestroServlet?action=1" class="btn btn-success">Insertar o Editar Información de Docentes</a>
+        </div>
+    </div>
+
+    <div id = "maestros" class="row">
+        <div id="tabla-maestros" class="col-md-12" style="margin-top: 10px">
+            <% String maestros = (String) request.getAttribute("maestros");
+                if (maestros != null) { %>
+            <%= maestros %>
+            <% } %>
+        </div>
+        <div  id = "editar-insertar-maestro" class="col-md-12" style = "margin-top: 10px">
+            <% String maestroResponse = (String) request.getAttribute("adminResponseMaestro");
+                if (maestroResponse != null) { %>
+            <%= maestroResponse %>
+            <% } %>
         </div>
     </div>
     <!-- Asignar Alumnos a Docentes -->

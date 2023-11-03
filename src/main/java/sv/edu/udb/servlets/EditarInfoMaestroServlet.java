@@ -62,13 +62,9 @@ public class EditarInfoMaestroServlet extends HttpServlet {
         int id = Integer.parseInt(session.getAttribute("ID").toString());
 
         if (session != null) {
-            try{
-                conn.conectar();
-                conn.updateMaestro(password, materia, id);
-                conn.cerrar();
-            } catch (Exception e) {
-                System.out.println("Error en EditarInfoMaestro");
-            }
+            conn.conectar();
+            conn.updateMaestro(password, materia, id);
+            conn.cerrar();
 
             session.setAttribute("materia",materia);
             session.setAttribute("password",password);

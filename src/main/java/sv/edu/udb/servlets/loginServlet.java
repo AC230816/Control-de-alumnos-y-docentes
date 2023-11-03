@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import sv.edu.udb.handler.Conexion;
+import sv.edu.udb.model.Admin;
 import sv.edu.udb.model.Alumno;
 import sv.edu.udb.model.Maestro;
 
@@ -78,6 +79,34 @@ public class loginServlet extends HttpServlet {
             }
 
             response.sendRedirect("maestro.jsp?exito=1");
+        } else if(conn.verificarInicioSesion(nombre, password) == 3){
+
+            Admin admin = new Admin();
+
+            admin.setNombre(nombre);
+            admin.setPassword(password);
+            admin.setQuery();
+
+            try{
+                conn.setRs(admin.getQuery());
+                ResultSet rs = conn.getRs();
+
+                while(rs.next()){
+                    session.setAttribute("apellido",rs.getString("Apellido"));
+                    session.setAttribute("edad",rs.getInt("Edad"));
+                    session.setAttribute("sexo",rs.getString("Sexo"));
+                    session.setAttribute("ID",rs.getInt("IDAdmin"));
+                }
+
+                rs.close();
+            } catch (Exception e){
+                System.out.println("Error en log in admin");
+                e.printStackTrace();
+            }
+
+            response.sendRedirect("admin.jsp?exito=1");
+        } else {
+            response.sendRedirect("login.jsp?exito=0");
         }
         conn.cerrar();
     }

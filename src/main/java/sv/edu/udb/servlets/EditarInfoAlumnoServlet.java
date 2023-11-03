@@ -54,13 +54,9 @@ public class EditarInfoAlumnoServlet extends HttpServlet {
         int id = Integer.parseInt(session.getAttribute("ID").toString());
 
         if (session != null) {
-            try{
-                conn.conectar();
-                conn.updateAlumno(edad, password, id);
-                conn.cerrar();
-            } catch (Exception e) {
-                System.out.println("Error en EditarInfo");
-            }
+            conn.conectar();
+            conn.updatePasswordAlumno(password, id);
+            conn.cerrar();
 
             session.setAttribute("edad",edad);
             session.setAttribute("password",password);

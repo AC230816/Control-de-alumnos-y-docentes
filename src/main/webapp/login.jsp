@@ -20,9 +20,11 @@
           <label for="password">Contraseña:</label>
           <input type="password" class="form-control" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+          <a href="registro.jsp" class="btn btn-success">Registrarse</a>
+        </div>
       </form>
-      <a href="registro.jsp" class="btn btn-success">Registrarse</a>
     </div>
   </div>
 </div>

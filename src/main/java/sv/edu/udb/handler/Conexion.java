@@ -1,6 +1,7 @@
 package sv.edu.udb.handler;
 
 import sv.edu.udb.model.Alumno;
+import sv.edu.udb.model.Maestro;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -119,19 +120,6 @@ public class Conexion {
         return 0;
     }
 
-    public void updateAlumno(int edad, String password, int id){
-        try{
-            Statement st = conn.createStatement();
-            String query = "UPDATE estudiante SET Edad = '" + edad + "', Password = '" + password + "'" +
-                    "WHERE IDEstudiante = '" + id + "'";
-            st.execute(query);
-            st.close();
-        } catch (Exception e){
-            System.out.println("Error al actualizar alumno");
-            e.printStackTrace();
-        }
-    }
-
     public void updateMaestro(String password, String materia, int id){
         try{
             Statement st = conn.createStatement();
@@ -145,31 +133,217 @@ public class Conexion {
         }
     }
 
+    public List<Maestro> selectMaestros(){
+        List<Maestro> maestros = new ArrayList<>();
+
+        try{
+            String query = "SELECT ID, Nombre, Apellido, Edad, Sexo, Materia FROM profesor";
+            this.setRs(query);
+
+            while (rs.next()){
+                Maestro maestro = new Maestro();
+                maestro.setId(rs.getInt("ID"));
+                maestro.setNombre(rs.getString("Nombre"));
+                maestro.setApellido(rs.getString("Apellido"));
+                maestro.setEdad(rs.getInt("Edad"));
+                maestro.setSexo(rs.getString("Sexo"));
+                maestro.setMateria(rs.getString("Materia"));
+
+                maestros.add(maestro);
+            }
+
+            rs.close();
+        } catch (Exception e){
+            System.out.println("Error al seleccionar todos los maestros");
+            e.printStackTrace();
+        }
+
+        return maestros;
+    }
+
+    public List<Integer> selectIDMaestro(){
+        List<Integer> IDS = new ArrayList<>();
+
+        String query = "SELECT ID FROM profesor";
+        this.setRs(query);
+
+        try{
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                IDS.add(id);
+            }
+
+            rs.close();
+        } catch (Exception e){
+            System.out.println("Error al seleccionar los ID de maestros");
+            e.printStackTrace();
+        }
+
+        return IDS;
+    }
+
+    public void updateNombreMaestro(String nombre, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE profesor SET Nombre = '" + nombre + "' WHERE ID = " + id;
+            st.execute(query);
+            System.out.println("Se actualizo el nombre maestro");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar nombre maestro");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateApellidoMaestro(String apellido, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE profesor SET Apellido = '" + apellido + "' WHERE ID = " + id;
+            st.execute(query);
+            System.out.println("Se actualizo el apellido maestro");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar apellido maestro");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEdadMaestro(int edad, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE profesor SET Edad = " + edad + " WHERE ID = " + id;
+            st.execute(query);
+            System.out.println("Se actualizo la edad maestro");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar edad maestro");
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePasswordMaestro(String password, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE profesor SET Password = '" + password + "' WHERE ID = " + id;
+            st.execute(query);
+            System.out.println("Se actualizo el password maestro");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar password maestro");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateMateriaMaestro(String materia, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE profesor SET Materia = '" + materia + "' WHERE ID = " + id;
+            st.execute(query);
+            System.out.println("Se actualizo la materia correctamente");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar materia maestro");
+            e.printStackTrace();
+        }
+    }
+
     public List<Alumno> selectAlumnos(){
         List<Alumno> alumnos = new ArrayList<>();
 
         try{
-           String query = "SELECT IDEstudiante, Nombre, Apellido, Edad, Sexo FROM estudiante";
-           this.setRs(query);
+            String query = "SELECT IDEstudiante, Nombre, Apellido, Edad, Sexo FROM estudiante";
+            this.setRs(query);
 
-           while (rs.next()){
-               Alumno alumno = new Alumno();
-               alumno.setId(rs.getInt("IDEstudiante"));
-               alumno.setNombre(rs.getString("Nombre"));
-               alumno.setApellido(rs.getString("Apellido"));
-               alumno.setEdad(rs.getInt("Edad"));
-               alumno.setSexo(rs.getString("Sexo"));
+            while (rs.next()){
+                Alumno alumno = new Alumno();
+                alumno.setId(rs.getInt("IDEstudiante"));
+                alumno.setNombre(rs.getString("Nombre"));
+                alumno.setApellido(rs.getString("Apellido"));
+                alumno.setEdad(rs.getInt("Edad"));
+                alumno.setSexo(rs.getString("Sexo"));
 
-               alumnos.add(alumno);
-           }
+                alumnos.add(alumno);
+            }
 
-           rs.close();
+            rs.close();
         } catch (Exception e){
             System.out.println("Error al seleccionar todos los alummnos");
             e.printStackTrace();
         }
 
         return alumnos;
+    }
+
+    public List<Integer> selectIDEstudiante(){
+        List<Integer> IDS = new ArrayList<>();
+
+        String query = "SELECT IDEstudiante FROM estudiante";
+        this.setRs(query);
+
+        try{
+            while(rs.next()){
+                int id = rs.getInt("IDEstudiante");
+                IDS.add(id);
+            }
+
+            rs.close();
+        } catch (Exception e){
+            System.out.println("Error al seleccionar los ID de estudiantes");
+            e.printStackTrace();
+        }
+
+        return IDS;
+    }
+
+    public void updateNombreAlumno(String nombre, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Nombre = '" + nombre + "'" +
+                    "WHERE IDEstudiante = '" + id + "'";
+            st.execute(query);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar nombre alumno");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateApellidoAlumno(String apellido, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Apellido = '" + apellido + "'" +
+                    "WHERE IDEstudiante = '" + id + "'";
+            st.execute(query);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar apellido alumno");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEdadAlumno(int edad, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Edad = '" + edad + "' WHERE IDEstudiante = '" + id + "'";
+            st.execute(query);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar edad alumno");
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePasswordAlumno(String password, int id){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET Password = '" + password + "'" +
+                    "WHERE IDEstudiante = '" + id + "'";
+            st.execute(query);
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al actualizar password alumno");
+            e.printStackTrace();
+        }
     }
 
     public void cerrar() {
