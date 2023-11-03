@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.maestro;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,8 +20,7 @@ public class EditarInfoMaestroServlet extends HttpServlet {
                             + "<h3>Actualizar Mi Información</h3>"
                             + "<form action = 'EditarInfoMaestro' method = 'post'>"
                             + "<div class = 'form-group'>" //Materia
-                            + "<label for 'materia'>Actualizar Contraseña: </label>"
-                            + "<label for='materia'>Materias:</label>"
+                            + "<label for='materia'>Actualizar materia:</label>"
                             + "<select class='form-control' id='materia' name='materia'>"
                             + "<option value='matematica'>Matemática</option>"
                             + "<option value='lenguaje'>Lenguaje</option>"
@@ -30,8 +29,8 @@ public class EditarInfoMaestroServlet extends HttpServlet {
                             + "</select>"
                             + "</div>" //Fin Materia
                             + "<div class = 'form-group'>"
-                            + "<label for 'password'>Actualizar Contraseña: </label>"
-                            + "<input type = 'password' id = 'password' name = 'password' class = 'form-control' required>"
+                            + "<label for = 'password'>Actualizar Contraseña: </label>"
+                            + "<input type = 'password' id = 'password' name = 'password' class = 'form-control'>"
                             + "</div>"
                             + "<div class = 'form-group'>"
                             + "<input type = 'submit' value = 'Actualizar' class = 'btn btn-primary'>"
@@ -63,12 +62,17 @@ public class EditarInfoMaestroServlet extends HttpServlet {
 
         if (session != null) {
             conn.conectar();
-            conn.updateMaestro(password, materia, id);
-            conn.cerrar();
 
-            session.setAttribute("materia",materia);
-            session.setAttribute("password",password);
-            session.setAttribute("ID",id);
+            if(!materia.isEmpty()){
+                conn.updateMateriaMaestro(materia,id);
+                session.setAttribute("materia",materia);
+            }
+            if(!password.isEmpty()){
+                conn.updatePasswordMaestro(password,id);
+                session.setAttribute("password",password);
+            }
+
+            conn.cerrar();
 
             response.sendRedirect("maestro.jsp");
         } else {

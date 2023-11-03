@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.admin;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -82,13 +82,12 @@ public class InsertarEditarAlumnoServlet extends HttpServlet {
 
             response.sendRedirect("admin.jsp");
         } else if("editar".equals(action)){
+            conn.conectar();
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
             String password = request.getParameter("password");
             String edad = request.getParameter("edad");
             int id = Integer.parseInt(request.getParameter("id"));
-
-            conn.conectar();
 
             if(!nombre.isEmpty()){
                 conn.updateNombreAlumno(nombre, id);

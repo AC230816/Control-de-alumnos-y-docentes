@@ -12,7 +12,7 @@ public class Alumno implements Serializable {
     private String password;
     private String query;
     private int id;
-    private Maestro maestro;
+    private int idMaestroAsignado;
 
     public Alumno(){}
 
@@ -38,9 +38,7 @@ public class Alumno implements Serializable {
     public int getId(){
         return this.id;
     }
-    public Maestro getMaestro() {
-        return this.maestro;
-    }
+    public int getIdMaestroAsignado() { return this.idMaestroAsignado; }
     //Setters
     public void setNombre(String nombre){
         this.nombre = nombre;
@@ -63,4 +61,5 @@ public class Alumno implements Serializable {
     public void setId(int id){
         this.id = id;
     }
+    public void setIdMaestroAsignado(int idMaestroAsignado) { this.idMaestroAsignado = idMaestroAsignado; }
 }

@@ -38,6 +38,18 @@
       <% } %>
     </div>
   </div>
+  <h2 class="mt-4">Docente Asignado</h2>
+  <div class="row">
+    <div class="col-md-6">
+        <a href="VerInfoMaestroAsignadoServlet" class="btn btn-primary">Visualizar Información del Docente</a>
+    </div>
+  </div>
+  <div id="ver-info-docente-asignado-response" class="col-md-12" style="margin-top: 10px">
+    <% String docenteAsignado = (String) request.getAttribute("maestroAsignado");
+      if (docenteAsignado != null) { %>
+    <%= docenteAsignado %>
+    <% } %>
+  </div>
 </div>
 
 </body>

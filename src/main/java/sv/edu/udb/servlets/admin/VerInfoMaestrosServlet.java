@@ -1,20 +1,21 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.admin;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import sv.edu.udb.handler.Conexion;
 import sv.edu.udb.model.Alumno;
+import sv.edu.udb.model.Maestro;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "VerInfoAlumnosServlet",value = "/VerInfoAlumnosServlet")
-public class VerInfoAlumnosServlet extends HttpServlet {
+@WebServlet(name = "VerInfoMaestrosServlet", value = "/VerInfoMaestrosServlet")
+public class VerInfoMaestrosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String alumnos = generarHtml();
-        request.setAttribute("alumnos", alumnos);
+        String maestros = generarHtml();
+        request.setAttribute("maestros", maestros);
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }
 
@@ -25,11 +26,11 @@ public class VerInfoAlumnosServlet extends HttpServlet {
 
     private String generarHtml(){
         Conexion conn = new Conexion();
-        List<Alumno> alumnos;
+        List<Maestro> maestros;
         StringBuilder sb = new StringBuilder();
 
         conn.conectar();
-        alumnos = conn.selectAlumnos();
+        maestros = conn.selectMaestros();
         conn.cerrar();
 
         sb.append("<div id = 'dynamicContent' class = 'alert alert-info' >");
@@ -40,15 +41,17 @@ public class VerInfoAlumnosServlet extends HttpServlet {
         sb.append("<th>Apellido</th>");
         sb.append("<th>Edad</th>");
         sb.append("<th>Sexo</th>");
+        sb.append("<th>Materia</th>");
         sb.append("</tr>");
 
-        for(Alumno alumno : alumnos){
+        for(Maestro maestro : maestros){
             sb.append("<tr>");
-            sb.append("<td>").append(alumno.getId()).append("</td>");
-            sb.append("<td>").append(alumno.getNombre()).append("</td>");
-            sb.append("<td>").append(alumno.getApellido()).append("</td>");
-            sb.append("<td>").append(alumno.getEdad()).append("</td>");
-            sb.append("<td>").append(alumno.getSexo()).append("</td>");
+            sb.append("<td>").append(maestro.getId()).append("</td>");
+            sb.append("<td>").append(maestro.getNombre()).append("</td>");
+            sb.append("<td>").append(maestro.getApellido()).append("</td>");
+            sb.append("<td>").append(maestro.getEdad()).append("</td>");
+            sb.append("<td>").append(maestro.getSexo()).append("</td>");
+            sb.append("<td>").append(maestro.getMateria()).append("</td>");
             sb.append("</tr>");
         }
 

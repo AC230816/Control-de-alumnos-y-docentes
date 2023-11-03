@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.alumno;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;

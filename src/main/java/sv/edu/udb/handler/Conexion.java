@@ -120,19 +120,6 @@ public class Conexion {
         return 0;
     }
 
-    public void updateMaestro(String password, String materia, int id){
-        try{
-            Statement st = conn.createStatement();
-            String query = "UPDATE estudiante SET Materia = '" + materia + "', Password = '" + password + "'"
-                    + "WHERE IDEstudiante = '" + id + "'";
-            st.execute(query);
-            st.close();
-        } catch (Exception e){
-            System.out.println("Error al actualizar maestro");
-            e.printStackTrace();
-        }
-    }
-
     public List<Maestro> selectMaestros(){
         List<Maestro> maestros = new ArrayList<>();
 
@@ -247,6 +234,58 @@ public class Conexion {
         }
     }
 
+    public Maestro selectMaestroAsignado(int id){
+        Maestro maestro = new Maestro();
+
+        String query = "SELECT ID, Nombre, Apellido, Edad, Sexo, Materia FROM profesor WHERE ID = " + id;
+
+        try{
+            this.setRs(query);
+            if(rs.next()){
+                maestro.setMateria(rs.getString("Materia"));
+                maestro.setNombre(rs.getString("Nombre"));
+                maestro.setApellido(rs.getString("Apellido"));
+                maestro.setEdad(rs.getInt("Edad"));
+                maestro.setId(rs.getInt("ID"));
+                maestro.setSexo(rs.getString("Sexo"));
+            }
+
+        } catch (Exception e){
+            System.out.println("Error al seleccionar maestro asignado");
+            e.printStackTrace();
+        }
+
+        return maestro;
+    }
+
+    public List<Alumno> selectAlumnosAsignados(int idMaestro){
+        List<Alumno> alumnos = new ArrayList<>();
+
+        try{
+            String query = "SELECT IDEstudiante, Nombre, Apellido, Edad, Sexo FROM estudiante WHERE IDMaestroAsignado = " + idMaestro;
+
+            this.setRs(query);
+
+            while (rs.next()){
+                Alumno alumno = new Alumno();
+                alumno.setId(rs.getInt("IDEstudiante"));
+                alumno.setNombre(rs.getString("Nombre"));
+                alumno.setApellido(rs.getString("Apellido"));
+                alumno.setEdad(rs.getInt("Edad"));
+                alumno.setSexo(rs.getString("Sexo"));
+
+                alumnos.add(alumno);
+            }
+
+            rs.close();
+        } catch (Exception e){
+            System.out.println("Error al seleccionar todos los alummnos asignados");
+            e.printStackTrace();
+        }
+
+        return alumnos;
+    }
+
     public List<Alumno> selectAlumnos(){
         List<Alumno> alumnos = new ArrayList<>();
 
@@ -342,6 +381,20 @@ public class Conexion {
             st.close();
         } catch (Exception e){
             System.out.println("Error al actualizar password alumno");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateMaestroAsignado(int idMaestro, int idEstudiante){
+        try{
+            Statement st = conn.createStatement();
+            String query = "UPDATE estudiante SET IDMaestroAsignado = '" + idMaestro + "'" +
+                    "WHERE IDEstudiante = '" + idEstudiante + "'";
+            st.execute(query);
+            System.out.println("Maestro asignado con exito");
+            st.close();
+        } catch (Exception e){
+            System.out.println("Error al asignar maestro a alumno");
             e.printStackTrace();
         }
     }

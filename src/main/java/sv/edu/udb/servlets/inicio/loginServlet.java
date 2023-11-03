@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.inicio;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,6 +43,7 @@ public class loginServlet extends HttpServlet {
                     session.setAttribute("edad",rs.getInt("Edad"));
                     session.setAttribute("sexo",rs.getString("Sexo"));
                     session.setAttribute("ID",rs.getInt("IDEstudiante"));
+                    session.setAttribute("IDMaestroAsignado",rs.getString("IDMaestroAsignado"));
                 }
 
                 rs.close();
@@ -51,7 +52,7 @@ public class loginServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            response.sendRedirect("alumno.jsp?exito=1");
+            response.sendRedirect("alumno.jsp");
         } else if(conn.verificarInicioSesion(nombre,password) == 2){
 
             Maestro maestro = new Maestro();
@@ -78,7 +79,7 @@ public class loginServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-            response.sendRedirect("maestro.jsp?exito=1");
+            response.sendRedirect("maestro.jsp");
         } else if(conn.verificarInicioSesion(nombre, password) == 3){
 
             Admin admin = new Admin();

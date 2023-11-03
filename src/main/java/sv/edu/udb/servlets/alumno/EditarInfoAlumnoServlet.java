@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.alumno;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,7 +49,6 @@ public class EditarInfoAlumnoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         session = request.getSession(false);
 
-        int edad = Integer.parseInt(request.getParameter("edad"));
         String password = request.getParameter("password");
         int id = Integer.parseInt(session.getAttribute("ID").toString());
 
@@ -58,7 +57,6 @@ public class EditarInfoAlumnoServlet extends HttpServlet {
             conn.updatePasswordAlumno(password, id);
             conn.cerrar();
 
-            session.setAttribute("edad",edad);
             session.setAttribute("password",password);
             session.setAttribute("ID",id);
 

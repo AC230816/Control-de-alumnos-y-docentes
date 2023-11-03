@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.maestro;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +14,16 @@ public class AlumnosAsignadosServlet extends HttpServlet {
     Conexion conn = new Conexion();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String alumnos = generarHtml();
+        HttpSession session = request.getSession(false);
+
+        Object idMaestro = session.getAttribute("ID");
+        int id = 0;
+
+        if(idMaestro instanceof Integer){
+            id = ((Integer) idMaestro).intValue();
+        }
+
+        String alumnos = generarHtml(id);
         request.setAttribute("alumnos", alumnos);
         request.getRequestDispatcher("maestro.jsp").forward(request,response);
     }
@@ -24,15 +33,16 @@ public class AlumnosAsignadosServlet extends HttpServlet {
 
     }
 
-    private String generarHtml(){
+    private String generarHtml(int id){
         List<Alumno> alumnos;
         StringBuilder sb = new StringBuilder();
 
         conn.conectar();
-        alumnos = conn.selectAlumnos();
+        alumnos = conn.selectAlumnosAsignados(id);
         conn.cerrar();
 
         sb.append("<div id = 'dynamicContent' class = 'alert alert-info' >");
+        sb.append("<h3>Alumnos Asignados</h3>");
         sb.append("<table class='table table-bordered table-striped'>");
         sb.append("<tr>");
         sb.append("<th>ID</th>");

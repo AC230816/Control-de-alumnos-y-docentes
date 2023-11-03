@@ -1,4 +1,4 @@
-package sv.edu.udb.servlets;
+package sv.edu.udb.servlets.admin;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -79,6 +79,7 @@ public class InsertarEditarMaestroServlet extends HttpServlet {
             String password = request.getParameter("password");
 
             conn.insertRegistroProfesor(nombre, apellido, edad, sexo, password, materia);
+            conn.cerrar();
 
             response.sendRedirect("admin.jsp");
         } else if("editar".equals(action)){
@@ -100,18 +101,13 @@ public class InsertarEditarMaestroServlet extends HttpServlet {
                 conn.updateEdadMaestro(intEdad,id);
             }
             if(!materia.isEmpty()){
-                try{
-                    conn.updateMateriaMaestro(materia,id);
-                } catch (Exception e){
-                    System.out.println("pasan cosas");
-                }
+                conn.updateMateriaMaestro(materia,id);
             }
             if(!password.isEmpty()){
                 conn.updatePasswordMaestro(password,id);
             }
+            conn.cerrar();
             response.sendRedirect("admin.jsp");
         }
-
-        conn.cerrar();
     }
 }
