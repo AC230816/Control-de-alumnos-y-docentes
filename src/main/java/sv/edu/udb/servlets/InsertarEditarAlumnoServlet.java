@@ -48,12 +48,10 @@ public class InsertarEditarAlumnoServlet extends HttpServlet {
 
             conn.conectar();
             IDS = conn.selectIDEstudiante();
-            int i = 1;
             for(int id : IDS){
-                sb.append("<option").append(" value = '").append(i).append("'>");
+                sb.append("<option").append(" value = '").append(id).append("'>");
                 sb.append(id);
                 sb.append("</option>");
-                i++;
             }
 
             conn.cerrar();
